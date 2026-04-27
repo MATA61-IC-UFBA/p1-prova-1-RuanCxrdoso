@@ -1,5 +1,3 @@
-/* e2.y */
-
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,12 +6,39 @@ void yyerror(char *s, ...);
 int yylex();
 %}
 
-%token NUM
+%token NUM ID STR
+%token PRINT CONCAT LENGTH
 %token EOL 0
 
 %%
+
 program
+: stmt_list
+;
+
+stmt_list
+: stmt_list stmt
+| stmt
+;
+
+stmt
 : expr EOL
+| assignment EOL
+| print_stmt EOL
+| EOL
+;
+
+assignment
+: ID '=' expr
+;
+
+print_stmt
+: PRINT expr_list
+;
+
+expr_list
+: expr_list ',' expr
+| expr
 ;
 
 expr
@@ -31,6 +56,14 @@ term
 factor
 : '(' expr ')'
 | NUM
+| ID
+| STR
+| function_call
+;
+
+function_call
+: CONCAT '(' expr_list ')'
+| LENGTH '(' expr ')'
 ;
 
 %%
