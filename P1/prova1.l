@@ -1,19 +1,26 @@
-%{
-#include "prova1.tab.h"
-#include <stdlib.h>
-#include <string.h>
-
-void yyerror(const char *msg);
-int yylex();
-%}
+/* recognize tokens for the calculator */
 
 %option noyywrap
+%{
+#include "token.h"
+%}
+
 
 %%
 
-/* copiar E2 e fazer as extensões */
+[ \t\r]+    { }
 
+[0-9]+      { return NUM; }
 
-.            { return ERROR; }
+"+"         { return '+'; }
+"-"         { return '-'; }
+"*"         { return '*'; }
+"/"         { return '/'; }
+"("         { return '('; }
+")"         { return ')'; }
+
+\n          { return EOL; }
+
+.           { return yytext[0]; }
 
 %%
