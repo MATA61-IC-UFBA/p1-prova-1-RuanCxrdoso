@@ -8,7 +8,7 @@
 
 [ \t\r]+    {  }
 
-"\\".*      { }
+"//".*      {  }
 
 "print"     { return PRINT; }
 "concat"    { return CONCAT; }
