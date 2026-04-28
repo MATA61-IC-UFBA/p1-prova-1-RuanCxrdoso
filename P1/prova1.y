@@ -8,7 +8,7 @@ int yylex();
 
 %token NUM ID STR
 %token PRINT CONCAT LENGTH
-%token EOL 0
+%token EOL
 
 %%
 
