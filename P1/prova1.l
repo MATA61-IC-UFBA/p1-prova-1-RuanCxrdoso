@@ -1,5 +1,5 @@
 %{
-#include "token.h"
+#include "prova1.tab.h"
 %}
 
 %option noyywrap
